@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<style>
+			@import "css/jquery.imageselect.css";
+		</style>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.imageselect.js"></script>
+		<script>
+			
+			
+			$(function() {
+				$("#imageSelectorContainer").imageselect({
+					rows: [
+						"http://files.kingdomhomesltd.local:8888/img/www/test.png",
+					    "http://files.kingdomhomesltd.co.uk/img/www/dsc0817.jpg"
+					]
+				});
+				$("#imageSelectorContainer").bind("selected", function(event, row, data) {
+					if(data) {
+						var selectedText = data.label ? data.label : data;
+						$("#selectedText").html(selectedText);
+					}
+				});
+				$("#doSomethingButton").click(function() {
+					$("#imageSelectorContainer").imageselect("setRows", [
+						{
+							label: "hi"
+							, src: "http://files.kingdomhomesltd.co.uk/img/www/dsc0817.jpg"
+							, width: 300, height: 183
+						}
+						,
+						{
+							label: "hi2"
+							, src: "http://files.kingdomhomesltd.co.uk/img/www/dsc0093.jpg"
+							, width: 300, height: 486
+						}
+				]);
+				});
+			});
+		</script>
+	</head>
+	
+	<body>
+		<div style="border: 1 px solid black">
+			<div id="imageSelectorContainer" class="imageselect" style="border: 1px solid red; margin: 5px">
+			</div>
+		</div>
+		
+		<button id="doSomethingButton">Set new data</button>
+		<p>Selected: <span id="selectedText"/></p>
+	</body>
+
+</html>

@@ -1,0 +1,43 @@
+/*!
+ * jQuery Image Selector Plugin
+ * version: 0.7.1 (11-APR-2012)
+ * @requires jQuery v1.7 or later
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ *    
+ *    
+ */
+ .is-selected {
+	background-color: orange;
+	max-height: 
+}
+
+.imageselect {
+	height: 200px;
+	overflow: auto;
+}
+
+.imageselect div {
+	height: 75px;
+	border: 1px solid white;
+} 
+
+.imageselect div:hover {
+	border: 1px solid grey;
+}
+
+.imageselect div span img {
+	
+	vertical-align: middle;
+	text-align: left;
+}
+.imageselect div span {
+	vertical-align: middle;
+	text-align: left;
+	width: 100px;
+	display:inline-block;
+	margin-right: 10px;
+}
+.imageselect div p {
+	display: inline;
+}
