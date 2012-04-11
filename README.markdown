@@ -5,7 +5,7 @@ A selection of jQuery plugins that I've developed for various projects.
 
 No guarantee is made that any will work in your particular use case, but they work in mine.
 
-Documentation is sparse.
+Documentation is sparse, but each individual project will have it's own README file.
 
 Plugins
 =============
