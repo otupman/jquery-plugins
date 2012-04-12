@@ -9,32 +9,62 @@
 			
 			
 			$(function() {
-				$("#imageSelectorContainer").imageselect({
+				/*
+				 * Setup the selector with some default images using a simple array
+				 */
+				$("#imageselector").imageselect({
 					rows: [
-						"http://files.kingdomhomesltd.local:8888/img/www/test.png",
-					    "http://files.kingdomhomesltd.co.uk/img/www/dsc0817.jpg"
+						"http://farm8.staticflickr.com/7070/6952198795_b69a7bea2c_n.jpg",
+					    "http://farm8.staticflickr.com/7186/6790181188_a3b93b3357_n.jpg"
 					]
 				});
-				$("#imageSelectorContainer").bind("selected", function(event, row, data) {
+				
+				/*
+				 * Setup event handler for the selected event.
+				 * event - the event itself
+				 * row - the DOM row element that was selected (in case you want to 
+				 * 		 do clever stuff); will be null if a value was unselected
+				 * data - the data for the row selected; will be null if a value 
+				 * 		  was unselected
+				 */
+				$("#imageselector").bind("selected", function(event, row, data) {
 					if(data) {
-						var selectedText = data.label ? data.label : data;
+						var selectedText = "";
+						// On this page, the existence of a label property signifies
+						// that it's a complex object rather than a simple string
+						if(data.label) {
+							// We have JSON data because the doSomethingButton has added nicer data
+							selectedText = data.label;
+							// There are better ways to do this of course
+							selectedText+= " - <a href='" + data.url + "' target='_blank'>";
+							selectedText+= "View on Flickr</a>"; 
+						}
+						else {
+							selectedText = data;							
+						}
 						$("#selectedText").html(selectedText);
 					}
 				});
+				
+				/*
+				 * Set some new data for the control, this time JSON data
+				 */
 				$("#doSomethingButton").click(function() {
-					$("#imageSelectorContainer").imageselect("setRows", [
+					$("#imageselector").imageselect("setRows", [
 						{
-							label: "hi"
-							, src: "http://files.kingdomhomesltd.co.uk/img/www/dsc0817.jpg"
-							, width: 300, height: 183
+							label: "Greaser Zombie"
+							, src: "http://farm3.staticflickr.com/2149/2539970942_804ddeff5a_n.jpg"
+							, width: 320, height: 242
+							, url: "http://www.flickr.com/photos/olliesphotos/2539970942/in/set-72057594104343908/"
 						}
 						,
 						{
-							label: "hi2"
-							, src: "http://files.kingdomhomesltd.co.uk/img/www/dsc0093.jpg"
-							, width: 300, height: 486
+							label: "Sensible Protection"
+							, src: "http://farm3.staticflickr.com/2394/2757832068_7a27772f90_n.jpg"
+							, width: 320, height: 241
+							, url: "http://www.flickr.com/photos/olliesphotos/2757832068/in/set-72157627231561780"
 						}
-				]);
+					]);
 				});
 			});
 		</script>
@@ -42,12 +72,12 @@
 	
 	<body>
 		<div style="border: 1 px solid black">
-			<div id="imageSelectorContainer" class="imageselect" style="border: 1px solid red; margin: 5px">
+			<div id="imageselector" class="imageselect" style="border: 1px solid red; margin: 5px">
 			</div>
 		</div>
-		
-		<button id="doSomethingButton">Set new data</button>
 		<p>Selected: <span id="selectedText"/></p>
+		
+		<p>Flickr names aren't so nice, so <button id="doSomethingButton">click here</button> to have a different set of images with nice(r) names</p>
 	</body>
 
 </html>
